@@ -1,0 +1,29 @@
+name: Update recent commits (private/org repos)
+
+on:
+  schedule:
+    - cron: "0 1 * * *" # 매일 01:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate recent commit tables
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TRACK_REPOS: ${{ vars.TRACK_REPOS }}
+          DAYS: "30"
+          TIMEZONE: "Asia/Seoul"
+        run: node .github/scripts/generate-recent-commits.mjs
+
+      - name: Commit README if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update recent commit stats from private/org repos"
+          file_pattern: README.md

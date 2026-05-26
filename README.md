@@ -6,41 +6,16 @@
 
 </div>
 
-> **참고:** 아래 **최근 커밋** 표는 실제 작업 레포 기준입니다.  
-> GitHub 프로필용 외부 이미지(stats·hits 등)는 **private/조직 레포**가 API에 안 잡히거나 서비스 장애(404·503)로 비어 보일 수 있어, 신뢰할 수 있는 수치는 이 표를 기준으로 보시면 됩니다.
+> **최근 커밋** 표는 Actions가 **private/조직 레포**를 GitHub API로 읽어 매일 갱신합니다.  
+> (외부 stats 이미지는 여전히 공개 API 한계가 있을 수 있습니다.)
 
 ---
 
-## 📌 최근 30일 커밋 (레포 기준 · 작성자 무관)
+## 📌 최근 30일 커밋 (private/조직 레포 포함)
 
-| 프로젝트 | 기간 내 커밋 |
-|----------|-------------:|
-| **audit-log-manager** | 22 |
-| **audit-log-server** | 20 |
-| **합계** | **42** |
-
-### audit-log-manager
-
-| 날짜 | 커밋 수 |
-|------|--------:|
-| 2026-04-29 | 1 |
-| 2026-05-11 | 5 |
-| 2026-05-14 | 2 |
-| 2026-05-15 | 9 |
-| 2026-05-18 | 3 |
-| 2026-05-20 | 2 |
-
-### audit-log-server
-
-| 날짜 | 커밋 수 |
-|------|--------:|
-| 2026-04-27 | 1 |
-| 2026-04-29 | 1 |
-| 2026-05-11 | 6 |
-| 2026-05-14 | 2 |
-| 2026-05-15 | 5 |
-| 2026-05-18 | 4 |
-| 2026-05-19 | 1 |
+<!--START_SECTION:recent-commits-->
+_아직 자동 집계 전입니다. [Actions에서 “Update recent commits” 실행](#-private조직-레포-커밋-자동-반영) 후 표가 채워집니다._
+<!--END_SECTION:recent-commits-->
 
 ---
 
@@ -61,6 +36,25 @@
 />
 
 </div>
+
+<details>
+<summary>🔧 Private/조직 레포 커밋 자동 반영</summary>
+
+1. **Fine-grained 또는 classic PAT** 생성  
+   - private/조직 레포 **읽기**: `repo` (classic) 또는 해당 org/repo에 **Contents: Read**  
+   - Early Bird와 같이 쓰면 **gist** 도 함께
+
+2. 이 레포 **Settings → Secrets → Actions**  
+   - `GH_TOKEN` = 위 PAT
+
+3. **Settings → Secrets and variables → Actions → Variables**  
+   - `TRACK_REPOS` = 쉼표로 전체 경로 (예: `내조직/audit-log-manager,내조직/audit-log-server`)
+
+4. **Actions** 탭 → **Update recent commits (private/org repos)** → **Run workflow**
+
+이후 매일 UTC 01:00에 README 표가 자동 갱신됩니다.
+
+</details>
 
 <details>
 <summary>📈 stats / 언어 / 트로피 / 스네이크 카드 (선택)</summary>
