@@ -1,8 +1,8 @@
-name: Update recent commits (private/org repos)
+name: Update activity (grass + stats)
 
 on:
   schedule:
-    - cron: "0 1 * * *" # 매일 01:00 UTC
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -14,16 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate recent commit tables
+      - name: Generate grass SVG and README sections
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TRACK_REPOS: ${{ vars.TRACK_REPOS }}
           DAYS: ${{ vars.DAYS || '365' }}
-          TIMEZONE: "Asia/Seoul"
-        run: node .github/scripts/generate-recent-commits.mjs
+          TIMEZONE: Asia/Seoul
+        run: node .github/scripts/generate-activity.mjs
 
-      - name: Commit README if changed
+      - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update recent commit stats from private/org repos"
-          file_pattern: README.md
+          commit_message: "chore: update work grass and activity stats"
+          file_pattern: README.md assets/*

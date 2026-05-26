@@ -1,90 +1,93 @@
 <div align="center">
 
-# 안녕하세요! 저는 sjr-ictk입니다 👋
+# sjr-ictk
 
-![Profile views](https://komarev.com/ghpvc/?username=sjr-ictk&label=Profile%20views&color=79c83d&style=flat)
+**Audit Log · Backend**
+
+<br/>
+
+![Profile views](https://komarev.com/ghpvc/?username=sjr-ictk&label=Profile%20views&color=39d353&style=for-the-badge)
+![Commits](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsjr-ictk%2Fsjr-ictk%2Fmain%2Fassets%2Fmeta.json&query=%24.total&label=commits%20(1y)&color=238636&style=for-the-badge&logo=github)
+![Repos tracked](https://img.shields.io/badge/repos-ictk--audit--log-1f6feb?style=for-the-badge)
 
 </div>
 
-> **작업량은 아래 「최근 1년 커밋」 표가 기준입니다.**  
-> 스트릭/그래프 이미지(1·1·3 등)는 GitHub **프로필 초록 칸**만 세며, private·조직 레포 대부분은 **포함되지 않습니다.**
+<br/>
 
----
-
-## 📌 최근 1년 커밋 (private/조직 레포 · API 집계)
-
-<!--START_SECTION:recent-commits-->
-_집계: **최근 1년** · Asia/Seoul · 작성자 무관 · API 커밋 수 · 마지막 갱신: 2026년 5월 26일 오후 6:10_
-
-> 스트릭/그래프의 **Total·Streak** 은 프로필 **초록 칸**만 셉니다. **실제 작업량은 아래 표**를 보세요.
-
-| 프로젝트 | 기간 내 커밋 |
-|----------|-------------:|
-| **on-device-audit-log-manager** | 213 |
-| **on-device-audit-log-server** | 111 |
-| **합계** | **324** |
-
-### on-device-audit-log-manager
-
-| 월 | 커밋 수 |
-|------|--------:|
-| 2025-05 | 35 |
-| 2025-06 | 137 |
-| 2025-07 | 40 |
-| 2025-08 | 1 |
-
-### on-device-audit-log-server
-
-| 월 | 커밋 수 |
-|------|--------:|
-| 2025-05 | 31 |
-| 2025-06 | 70 |
-| 2025-07 | 10 |
-
-<!--END_SECTION:recent-commits-->
-
----
-
-<details>
-<summary>📊 GitHub 프로필 위젯 (초록 칸만 · 참고용)</summary>
+## 🌿 작업 잔디
 
 <div align="center">
 
-![GitHub streak](https://streak-stats.demolab.com/?user=sjr-ictk&theme=tokyonight&hide_border=true&include_all_commits=true)
+<img src="./assets/work-grass.svg" alt="최근 1년 커밋 잔디 (private·org 레포 포함)" width="920" />
 
-<img
-  height="180em"
-  alt="GitHub contribution activity graph"
-  src="https://github-readme-activity-graph.vercel.app/graph?username=sjr-ictk&bg_color=1a1b27&color=70a5fd&line=bf91f3&point=38bdae&area=true&hide_border=true&include_all_commits=true"
-/>
+**프로필에 보이는 GitHub 잔디와는 다른 그래프입니다** — 아래 표·SVG는 `ictk-solution-dev` audit-log 레포 커밋을 직접 모은 것입니다.
 
 </div>
 
-- **Settings → Profile → Include private contributions** 를 켜도, 조직 private 레포는 그래프에 안 잡히는 경우가 많습니다.
-- 숫자가 적게 나오는 것은 **만료 PAT·미설정 TRACK_REPOS** 문제가 아니라, **위젯 종류의 한계**입니다.
+<br/>
 
-</details>
+## 📊 활동 요약
+
+<div align="center">
+
+<!--START_SECTION:activity-summary-->
+<table>
+  <tr>
+    <td align="center"><strong style="font-size:1.4em">324</strong><br/><sub>commits</sub></td>
+    <td align="center"><strong style="font-size:1.4em">2</strong><br/><sub>repos</sub></td>
+    <td align="center"><strong style="font-size:1.1em">최근 1년</strong><br/><sub>Asia/Seoul</sub></td>
+  </tr>
+</table>
+
+<sub>마지막 갱신 · 2026. 5. 26. 오후 6:06</sub>
+<!--END_SECTION:activity-summary-->
+
+</div>
+
+<br/>
+
+## 📁 레포별 · 월별
+
+<!--START_SECTION:recent-commits-->
+| 레포 | 커밋 |
+|:------|-----:|
+| `on-device-audit-log-manager` | **213** |
+| `on-device-audit-log-server` | **111** |
+| **합계** | **324** |
+
+| 월 | on-device-audit-log-manager | on-device-audit-log-server | 합계 |
+|----|------:|------:|------:|
+| **2025-05** | 35 | 31 | **66** |
+| **2025-06** | 137 | 70 | **207** |
+| **2025-07** | 40 | 10 | **50** |
+| **2025-08** | 1 | · | **1** |
+<!--END_SECTION:recent-commits-->
+
+<br/>
+
+### ❓ 그런데 [github.com](https://github.com/sjr-ictk) 프로필 잔디에는 왜 안 찍히나요?
+
+GitHub **공식 잔디**는 아래를 **모두** 만족할 때만 색이 칠해집니다.
+
+| 조건 | 확인 |
+|------|------|
+| 커밋 **author 이메일**이 내 GitHub **인증 이메일**과 일치 | `git config user.email` · Settings → Emails |
+| **Include private contributions on my profile** 켜기 | Settings → Profile |
+| 조직 **private** 레포 | org 정책상 프로필에 **아예 안 보이는** 경우 많음 |
+
+조직 `ictk-solution-dev` private 레포에서 작업하신 분은, **프로필 잔디는 1·1·3처럼 적게 나와도 정상**일 수 있습니다.  
+이 README의 **작업 잔디 SVG**가 그 커밋을 대신 보여 주도록 설계했습니다.
+
+<br/>
 
 ---
 
 <details>
-<summary>🔧 Private/조직 레포 커밋 자동 반영</summary>
+<summary>⚙️ 자동 갱신 (Actions)</summary>
 
-1. **PAT** (classic `repo` 또는 fine-grained **Contents: Read** + org SSO authorize)
-2. **Secrets** → `GH_TOKEN`
-3. **Variables** → `TRACK_REPOS` = `ictk-solution-dev/on-device-audit-log-manager,ictk-solution-dev/on-device-audit-log-server`
-4. (선택) **Variables** → `DAYS` = `365` (기본값 365, 더 짧게 쓰려면 예: `90`)
-5. **Actions** → **Update recent commits (private/org repos)** → **Run workflow**
-
-매일 UTC 01:00에 README가 갱신됩니다. 90일 초과 시 일별 대신 **월별** 표로 출력합니다.
-
-</details>
-
-<details>
-<summary>📈 stats / 언어 / 스네이크 등 (선택)</summary>
-
-- 통계·언어: `https://github-readme-stats.vercel.app/api?username=sjr-ictk&count_private=true&include_all_commits=true`
-- 스네이크: `.github/workflows/snake.yml` 실행 후 `output` 브랜치
-- Early Bird: `.github/workflows/productive-box.yml` + `GH_TOKEN`, `GIST_ID`
+1. **Secrets** `GH_TOKEN` — `repo` + org **SSO authorize**
+2. **Variables** `TRACK_REPOS`  
+   `ictk-solution-dev/on-device-audit-log-manager,ictk-solution-dev/on-device-audit-log-server`
+3. Actions → **Update activity (grass + stats)** → Run workflow
 
 </details>
