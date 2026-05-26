@@ -1,0 +1,20 @@
+name: Early Bird Stats (productive-box)
+
+on:
+  schedule:
+    # 매일 자정 UTC (한국시간 오전 9시) 실행
+    - cron: "0 0 * * *"
+  workflow_dispatch: # 수동 실행 허용
+
+jobs:
+  update-gist:
+    name: Update Early Bird Gist
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: maxam2017/productive-box@main
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+          # 한국 시간대 기준으로 시간대 설정
+          TIMEZONE: "Asia/Seoul"
