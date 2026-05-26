@@ -2,7 +2,7 @@ import fs from "node:fs";
 
 const token = process.env.GH_TOKEN;
 const reposRaw = process.env.TRACK_REPOS ?? "";
-const days = Number.parseInt(process.env.DAYS ?? "30", 10);
+const days = Number.parseInt(process.env.DAYS ?? "365", 10);
 const tz = process.env.TIMEZONE ?? "Asia/Seoul";
 const readmePath = process.env.README_PATH ?? "README.md";
 
@@ -20,7 +20,9 @@ const repos = reposRaw
   .filter(Boolean);
 
 if (repos.length === 0) {
-  console.error("TRACK_REPOS is empty. Set repository variable TRACK_REPOS (e.g. org/audit-log-manager,org/audit-log-server).");
+  console.error(
+    "TRACK_REPOS is empty. Set repository variable TRACK_REPOS (e.g. org/audit-log-manager,org/audit-log-server).",
+  );
   process.exit(1);
 }
 
@@ -72,6 +74,21 @@ function dateKey(iso) {
   }).format(new Date(iso));
 }
 
+/** @param {Map<string, number>} byDate */
+function rollupRows(byDate) {
+  const useMonthly = days > 90;
+  const rolled = new Map();
+
+  for (const [key, count] of byDate) {
+    const bucket = useMonthly ? key.slice(0, 7) : key;
+    rolled.set(bucket, (rolled.get(bucket) ?? 0) + count);
+  }
+
+  const label = useMonthly ? "월" : "날짜";
+  const rows = [...rolled.entries()].sort(([a], [b]) => a.localeCompare(b));
+  return { label, rows };
+}
+
 function buildSection(repoStats) {
   const grandTotal = repoStats.reduce((sum, r) => sum + r.total, 0);
   const updatedAt = new Intl.DateTimeFormat("ko-KR", {
@@ -80,8 +97,11 @@ function buildSection(repoStats) {
     timeStyle: "short",
   }).format(new Date());
 
+  const periodLabel = days >= 365 ? "최근 1년" : `최근 ${days}일`;
+
   let md = "";
-  md += `_집계: 최근 ${days}일 · ${tz} 기준 날짜 · 작성자 무관 · 마지막 갱신: ${updatedAt}_\n\n";
+  md += `_집계: **${periodLabel}** · ${tz} · 작성자 무관 · API 커밋 수 · 마지막 갱신: ${updatedAt}_\n\n`;
+  md += `> 스트릭/그래프의 **Total·Streak** 은 프로필 **초록 칸**만 셉니다. **실제 작업량은 아래 표**를 보세요.\n\n`;
   md += "| 프로젝트 | 기간 내 커밋 |\n|----------|-------------:|\n";
   for (const r of repoStats) {
     md += `| **${r.shortName}** | ${r.total} |\n`;
@@ -91,10 +111,10 @@ function buildSection(repoStats) {
   for (const r of repoStats) {
     md += `### ${r.shortName}\n\n`;
     if (r.rows.length === 0) {
-      md += `_해당 기간 커밋 없음_\n\n";
+      md += `_해당 기간 커밋 없음_\n\n`;
       continue;
     }
-    md += "| 날짜 | 커밋 수 |\n|------|--------:|\n";
+    md += `| ${r.bucketLabel} | 커밋 수 |\n|------|--------:|\n`;
     for (const [date, count] of r.rows) {
       md += `| ${date} | ${count} |\n`;
     }
@@ -134,10 +154,11 @@ for (const fullName of repos) {
     byDate.set(key, (byDate.get(key) ?? 0) + 1);
   }
 
-  const rows = [...byDate.entries()].sort(([a], [b]) => a.localeCompare(b));
+  const { label: bucketLabel, rows } = rollupRows(byDate);
   repoStats.push({
     shortName: repo,
     total: commits.length,
+    bucketLabel,
     rows,
   });
 }
@@ -147,4 +168,4 @@ const readme = fs.readFileSync(readmePath, "utf8");
 const next = replaceSection(readme, section);
 fs.writeFileSync(readmePath, next, "utf8");
 
-console.log(`Updated ${readmePath} for repos: ${repos.join(", ")}`);
+console.log(`Updated ${readmePath} for repos: ${repos.join(", ")} (${days} days)`);

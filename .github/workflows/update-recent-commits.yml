@@ -18,7 +18,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TRACK_REPOS: ${{ vars.TRACK_REPOS }}
-          DAYS: "30"
+          DAYS: ${{ vars.DAYS || '365' }}
           TIMEZONE: "Asia/Seoul"
         run: node .github/scripts/generate-recent-commits.mjs
 
